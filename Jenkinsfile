@@ -19,7 +19,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t linkedin-clone .'
+                sh 'docker build -t LinkedIn_Test .'
             }
         }
 
@@ -27,7 +27,7 @@ pipeline {
             steps {
                 sh 'docker stop linkedin-container || true'
                 sh 'docker rm linkedin-container || true'
-                sh 'docker run -d -p 3131:3000 --name linkedin-container linkedin-clone'
+                sh 'docker run -d -p 3131:3000 --name linkedin-container LinkedIn_Test'
             }
         }
 
