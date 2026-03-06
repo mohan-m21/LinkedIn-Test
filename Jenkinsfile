@@ -27,7 +27,7 @@ pipeline {
             steps {
                 sh 'docker stop linkedin-container || true'
                 sh 'docker rm linkedin-container || true'
-                sh 'docker run -d -p 3131:3000 --name linkedin-container LinkedIn_Test'
+                sh 'docker run -d -p 3131:3000 --name linkedin-container linkedin_test'
             }
         }
 
