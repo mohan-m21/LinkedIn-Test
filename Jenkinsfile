@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "imohan21/linkedin_test"
+        IMAGE_NAME = "linkedin_test"
         IMAGE_TAG = "${BUILD_NUMBER}"
     }
     stages {
