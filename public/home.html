@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>LinkedIn Clone</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#f3f2ef;
+}
+
+/* Navbar */
+
+.navbar{
+display:flex;
+align-items:center;
+background:white;
+padding:10px 20px;
+box-shadow:0 1px 5px rgba(0,0,0,0.1);
+}
+
+.logo{
+font-size:22px;
+font-weight:bold;
+color:#0a66c2;
+margin-right:20px;
+}
+
+.search{
+flex:1;
+}
+
+.search input{
+width:60%;
+padding:8px;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
+.nav-links a{
+margin-left:20px;
+text-decoration:none;
+color:#555;
+font-size:14px;
+}
+
+/* Layout */
+
+.container{
+display:flex;
+margin:20px;
+}
+
+/* Left Profile */
+
+.profile{
+width:20%;
+background:white;
+padding:15px;
+border-radius:8px;
+box-shadow:0 1px 4px rgba(0,0,0,0.1);
+}
+
+.profile img{
+width:80px;
+border-radius:50%;
+}
+
+.profile h3{
+margin:10px 0 5px;
+}
+
+/* Feed */
+
+.feed{
+width:55%;
+margin:0 20px;
+}
+
+.post-box{
+background:white;
+padding:15px;
+border-radius:8px;
+margin-bottom:15px;
+box-shadow:0 1px 4px rgba(0,0,0,0.1);
+}
+
+.post-box textarea{
+width:100%;
+height:60px;
+padding:8px;
+}
+
+.post{
+background:white;
+padding:15px;
+border-radius:8px;
+margin-bottom:15px;
+box-shadow:0 1px 4px rgba(0,0,0,0.1);
+}
+
+/* Right sidebar */
+
+.sidebar{
+width:25%;
+background:white;
+padding:15px;
+border-radius:8px;
+height:200px;
+box-shadow:0 1px 4px rgba(0,0,0,0.1);
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+
+<div class="navbar">
+
+<div class="logo">LinkedIn</div>
+
+<div class="search">
+<input type="text" placeholder="Search">
+</div>
+
+<div class="nav-links">
+<a href="#">Home</a>
+<a href="#">Network</a>
+<a href="#">Jobs</a>
+<a href="#">Messaging</a>
+<a href="#">Profile</a>
+</div>
+
+</div>
+
+<!-- Main Layout -->
+
+<div class="container">
+
+<!-- Profile Section -->
+
+<div class="profile">
+
+<img src="https://via.placeholder.com/80">
+
+<h3>Mohan</h3>
+<p>DevOps Engineer</p>
+
+<hr>
+
+<p><b>Connections</b><br>120</p>
+
+<p><b>Profile Views</b><br>45</p>
+
+</div>
+
+<!-- Feed Section -->
+
+<div class="feed">
+
+<div class="post-box">
+
+<textarea id="postContent" placeholder="Start a post"></textarea>
+<br><br>
+
+<button onclick="createPost()">Post</button>
+
+</div>
+
+<div id="feed"></div>
+
+</div>
+
+<!-- Right Sidebar -->
+
+<div class="sidebar">
+
+<h3>Trending</h3>
+
+<ul>
+<li>Cloud Computing</li>
+<li>DevOps</li>
+<li>AI</li>
+<li>Software Engineering</li>
+</ul>
+
+</div>
+
+</div>
+
+<script>
+
+async function createPost(){
+
+const content=document.getElementById("postContent").value
+
+await fetch("/posts/create",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+user_id:1,
+content:content
+})
+})
+
+loadPosts()
+
+}
+
+async function loadPosts(){
+
+const res=await fetch("/posts")
+
+const posts=await res.json()
+
+const feed=document.getElementById("feed")
+
+feed.innerHTML=""
+
+posts.forEach(p=>{
+feed.innerHTML+=`
+<div class="post">
+<b>${p.name}</b>
+<p>${p.content}</p>
+</div>
+`
+})
+
+}
+
+loadPosts()
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Create Post</h2>
+
+<textarea id="post"></textarea><br>
+<button onclick="createPost()">Post</button>
+
+<h2>Feed</h2>
+
+<div id="feed"></div>
+
+<script>
+
+async function createPost(){
+
+const user=JSON.parse(localStorage.getItem("user"))
+
+const content=document.getElementById("post").value
+
+await fetch("/posts/create",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({user_id:user.id,content})
+})
+
+loadPosts()
+
+}
+
+async function loadPosts(){
+
+const res=await fetch("/posts")
+
+const posts=await res.json()
+
+const feed=document.getElementById("feed")
+
+feed.innerHTML=""
+
+posts.forEach(p=>{
+feed.innerHTML+=`<p><b>${p.name}</b>: ${p.content}</p>`
+})
+
+}
+
+loadPosts()
+
+</script>
+
+</body>
+</html>
