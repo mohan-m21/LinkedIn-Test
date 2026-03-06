@@ -25,7 +25,8 @@ pipeline {
         stage(' Push Image into DockerHub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'Mohan_GitHub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-    // some block
+                sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
+                sh "docker push ${IMAGE_NAME}:latest"
 }
             }
         }
