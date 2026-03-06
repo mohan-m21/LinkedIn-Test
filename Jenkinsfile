@@ -22,6 +22,13 @@ pipeline {
                 sh 'docker build -t linkedin_test .'
             }
         }
+        stage(' Push Image into DockerHub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'Mohan_GitHub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+    // some block
+}
+            }
+        }
 
         stage('Run Container') {
             steps {
