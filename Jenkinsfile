@@ -19,7 +19,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t linkedIn_test .'
+                sh 'docker build -t linkedin_test .'
             }
         }
 
