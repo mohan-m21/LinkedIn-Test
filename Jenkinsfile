@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "linkedin_test"
+        IMAGE_NAME = "imohan/21linkedin_test"
         IMAGE_TAG = "${BUILD_NUMBER}"
     }
     stages {
@@ -23,7 +23,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t linkedin_test .'
+                sh 'docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .'
             }
         }
         stage(' Push Image into DockerHub') {
