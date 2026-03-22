@@ -26,6 +26,11 @@ pipeline {
                 sh 'docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .'
             }
         }
+        stage('Docker Images') {
+            steps {
+                sh 'docker images'
+            }
+        }
         stage(' Push Image into DockerHub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'Mohan_GitHub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
