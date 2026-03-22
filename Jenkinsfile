@@ -35,7 +35,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'Mohan_GitHub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                 sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
-                sh "docker push ${IMAGE_NAME}:latest"
+//                sh "docker push ${IMAGE_NAME}:latest"
 }
             }
         }
